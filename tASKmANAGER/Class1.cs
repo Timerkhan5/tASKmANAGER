@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace tASKmANAGER
 {
-    enum Status
+     public enum Status
     {
         ToDo,
         InProgress,
         Done
     }
-    class Task
+     public class Task
     {
         public static int Id { get; set; }
         public string Description { get; set; }
