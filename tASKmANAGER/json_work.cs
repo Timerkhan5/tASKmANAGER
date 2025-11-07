@@ -5,17 +5,14 @@ public class TaskManager
 {
     public TaskManager() { }
 
-    public static List<TaskItem> Tasks = new List<TaskItem>();
+    public static List<TaskItem> Tasks = JsonSerializer.Deserialize<List<TaskItem>>(System.IO.File.ReadAllText("tasks.json")) ?? new List<TaskItem>();
     public static void addTask(TaskItem task)
     {
         Tasks.Add(task);
-        saveTasks(Tasks);
     }
     public static void deleteTask(int id)
     {
-        Tasks.RemoveAll(t => t.Id == id);
-        saveTasks(Tasks);
-    }
+        Tasks.RemoveAll(t => t.Id == id);    }
     public static void getListTaskByStatus(Status status)
     {
         if (!System.IO.File.Exists("tasks.json"))
@@ -51,7 +48,7 @@ public class TaskManager
             }
         }
     }
-    private static void saveTasks(List<TaskItem> tasks)
+    public static  void saveTasks(List<TaskItem> tasks)
     {
         string json = JsonSerializer.Serialize(tasks);
         System.IO.File.WriteAllText("tasks.json", "");
