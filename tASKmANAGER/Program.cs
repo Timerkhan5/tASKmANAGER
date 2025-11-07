@@ -12,13 +12,11 @@
             id++;
             TaskManager.addTask(task1);
             TaskManager.addTask(task2);
-            TaskManager.getListOfTasks();
-            TaskManager.deleteTask(1);
+            Console.WriteLine("\n\nAll tasks\n\n");
             TaskManager.getListOfTasks();
             task2.updateStatus(Status.InProgress);
-            TaskManager.getListOfTasks();
-            task2.updateDescription("Reading 'The Pragmatic Programmer'");
-            TaskManager.getListOfTasks();
+            Console.WriteLine("\n\nAll tasks in progress\n\n");
+            TaskManager.getListTaskByStatus(Status.InProgress);
         }
     }
 }

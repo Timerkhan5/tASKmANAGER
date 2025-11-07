@@ -16,6 +16,25 @@ public class TaskManager
         Tasks.RemoveAll(t => t.Id == id);
         saveTasks(Tasks);
     }
+    public static void getListTaskByStatus(Status status)
+    {
+        if (!System.IO.File.Exists("tasks.json"))
+        {
+            Console.WriteLine("There's no tasks :( ");
+        }
+        else
+        {
+            int i = 1;
+            foreach (var t in Tasks.Where(t => t.TaskStatus == status))
+            {
+                if (t.TaskStatus == status)
+                {
+                    Console.WriteLine($"\n\n###\nTask {i}\n\nID: {t.Id}, Description: {t.Description}, Status: {t.TaskStatus}, Created At: {t.CreatedAt}, Updated At: {t.UpdatedAt}\n\n###");
+                    i++;
+                }
+            }
+        }
+    }
     public static void getListOfTasks()
     {
         if (!System.IO.File.Exists("tasks.json"))
