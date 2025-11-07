@@ -1,30 +1,43 @@
 using System.Text.Json;
-void addTask(Task task)
+using tASKmANAGER;
+
+public class TaskManager
 {
-    using (FileStream fs = new FileStream("tasks.json", FileMode.Append, FileAccess.Write))
+    public TaskManager() { }
+
+    public static List<TaskItem> Tasks = new List<TaskItem>();
+    public static void addTask(TaskItem task)
     {
-        JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-        JsonSerializer.Serialize(fs, task, options);
+        Tasks.Add(task);
+        saveTasks(Tasks);
     }
-}
-void deleteTask(int taskId)
-{
-    var tasks = new List<Task>();
-    using (FileStream fs = new FileStream("tasks.json", FileMode.Open, FileAccess.Read))
+    public static void deleteTask(int id)
     {
-        tasks = JsonSerializer.Deserialize<List<Task>>(fs);
+        Tasks.RemoveAll(t => t.Id == id);
+        saveTasks(Tasks);
     }
-    tasks.RemoveAll(t => t.Id == taskId);
-    using (FileStream fs = new FileStream("tasks.json", FileMode.Create, FileAccess.Write))
+    public static void getListOfTasks()
     {
-        JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-        JsonSerializer.Serialize(fs, tasks, options);
+        if (!System.IO.File.Exists("tasks.json"))
+        {
+            Console.WriteLine("There's no tasks :( ");
+        }
+        else
+        {
+            int i = 1;
+            foreach (var t in Tasks)
+            {
+                Console.WriteLine($"\n\n###\nTask {i}\n\nID: {t.Id}, Description: {t.Description}, Status: {t.TaskStatus}, Created At: {t.CreatedAt}, Updated At: {t.UpdatedAt}\n\n###");
+                i++;
+            }
+        }
     }
-}
-List<Task> getAllTasks()
-{
-    using (FileStream fs = new FileStream("tasks.json", FileMode.Open, FileAccess.Read))
+    private static void saveTasks(List<TaskItem> tasks)
     {
-        return JsonSerializer.Deserialize<List<Task>>(fs);
+        string json = JsonSerializer.Serialize(tasks);
+        System.IO.File.WriteAllText("tasks.json", "");
+        System.IO.File.WriteAllText("tasks.json", json);
     }
+
+
 }

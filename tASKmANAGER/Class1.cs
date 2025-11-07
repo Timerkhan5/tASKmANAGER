@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace tASKmANAGER
+﻿namespace tASKmANAGER
 {
-     public enum Status
+    public enum Status
     {
         ToDo,
         InProgress,
         Done
     }
-     public class Task
+    public class TaskItem
     {
-        public static int Id { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public Status TaskStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public Task() { }
-        public Task(string description)
+        public TaskItem() { }
+        public TaskItem(string description,int id)
         {
-            Id++;
+            Id = id+1;
             Description = description;
             TaskStatus = Status.ToDo;
             CreatedAt = DateTime.Now;
