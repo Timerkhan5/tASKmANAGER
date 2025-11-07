@@ -24,7 +24,7 @@
             {
                 id = TaskManager.Tasks.Max(t => t.Id);
             }
-            string command = Console.ReadLine();
+            string? command = Console.ReadLine();
             while (command != "exit")
             {
                 if (command == "help")
@@ -35,7 +35,7 @@
                else  if (command == "add")
                 {
                     Console.WriteLine("Enter task description : ");
-                    string description = Console.ReadLine();
+                    string? description = Console.ReadLine();
                     TaskItem task = new TaskItem(description, id);
                     TaskManager.addTask(task);
                     id++;
@@ -62,7 +62,7 @@
                 else if (command == "get_list_by")
                 {
                     Console.WriteLine("Enter status (ToDo, InProgress, Done) : ");
-                    string statusInput = Console.ReadLine();
+                    string? statusInput = Console.ReadLine();
                     if (Enum.TryParse<Status>(statusInput, out Status status))
                     {
                         Console.WriteLine("\nThere's list of tasks filtered by status :) ");
@@ -84,7 +84,7 @@
                     if (taskToUpdate != null)
                     {
                         Console.WriteLine("Enter new description : ");
-                        string newDescription = Console.ReadLine();
+                        string? newDescription = Console.ReadLine();
                         taskToUpdate.updateDescription(newDescription);
                         Console.WriteLine("\n\nTask description updated sucessfully!\nNext command");
                         command = Console.ReadLine();
@@ -103,7 +103,7 @@
                     if (taskToUpdate != null)
                     {
                         Console.WriteLine("Enter new status (ToDo, InProgress, Done) : ");
-                        string statusInput = Console.ReadLine();
+                        string? statusInput = Console.ReadLine();
                         if (Enum.TryParse<Status>(statusInput, out Status newStatus))
                         {
                             taskToUpdate.updateStatus(newStatus);

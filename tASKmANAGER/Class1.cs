@@ -9,12 +9,12 @@
     public class TaskItem
     {
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public Status TaskStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public TaskItem() { }
-        public TaskItem(string description,int id)
+        public TaskItem(string? description,int id)
         {
             Id = id+1;
             Description = description;
@@ -22,7 +22,7 @@
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
         }
-        public void updateDescription(string newDescription)
+        public void updateDescription(string? newDescription)
         {
             Description = newDescription;
             UpdatedAt = DateTime.Now;
